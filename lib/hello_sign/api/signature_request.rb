@@ -244,9 +244,16 @@ module HelloSign
       #
       def signature_request_files(opts)
         path = "/signature_request/files/#{opts[:signature_request_id]}"
+        
         if opts[:file_type]
           path = path + "?file_type=#{opts[:file_type]}"
         end
+        
+        if opts[:get_url]
+          separator = opts[:file_type] ? '&' : '?'
+          path = path + "#{separator}get_url=#{opts[:get_url]}"
+        end
+        
         get(path)
       end
 
